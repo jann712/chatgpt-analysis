@@ -3,7 +3,13 @@ export type Message = {
         content: {
             parts: [string]
         }
+        author: {
+            role: string
+        }
     }
+    create_time: number
+    
+    id: string
 }
 
 type Mapping = {
@@ -12,8 +18,8 @@ type Mapping = {
 
 export type Conversation = {
     title: string
-    create_time: string
-    update_time: string
+    create_time: number
+    update_time: number
     mapping: {
         [key:string]: Message
     }
