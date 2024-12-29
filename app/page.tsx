@@ -48,46 +48,41 @@ export default function Home() {
       </div>
       <p className="text-center mt-4 text-lg">which are:</p>
       <div className="grid grid-cols-4 m-12 gap-3">
-        {data && data.map((conv, index) => {
+        {data && data.map((conv) => {
           const updateTime = new Date(conv.update_time * 1000).toDateString()
           const messages = Object.values(conv.mapping)
-          // console.log(conv.mapping)
+          
           const messagesList: Message[] = []
           for (const value of messages) {
             messagesList.push(value)
           }
           const transformedList = messagesList.filter((item) => item.message && item.message?.author?.role != 'system')
-          console.log(transformedList)
-          // console.log(messagesList)
+          // console.log(transformedList)
+          
           return (
-            <div key={index} className=" items-center border-4 border-blue-200 p-2 rounded-md">
+            <div className=" items-center border-4 border-blue-200 p-2 rounded-md">
               <h4 className="font-semibold text-orange-500">{conv.title}</h4>
               <span>Number of user inputs: </span>
               <span className='text-xl text-blue-600 font-semibold'>{transformedList.filter((item) => item.message.author.role == "user").length}</span>
               <p>Last updated: {updateTime}</p>
-              {transformedList.map((item, index) => {
+              {transformedList.map((item, secondIndex) => {
+                console.log(secondIndex)
                 return (
-                  <div key={item.id}>
+                  <div>
                     {item.message && item.message.content.parts.map((text, itemIndex) => {
-                      
-                      // if (item.message.author.role == 'system') 
-                      // if (item.message.author.role == 'assistant') {
-                      //   const accordionContent = document.getElementById(transformedList[itemIndex - 1].id)
-                      //   accordionContent.innerHTML = text
-                      //   console.log(transformedList[index - 1].id)
-                      //   return
-                      // }
+                      // console.log(itemIndex)
+
                       return (
-                        // <div key={index} className='overflow-x-auto max-w-full'>{parse(marked.parse(text))}</div>
+
                         <>
-                        {item.message.author.role == 'user' && <Accordion type="single" collapsible key={itemIndex}>
-                          <AccordionItem value="item-1" key={item.id}>
-                            <AccordionTrigger>{text}</AccordionTrigger>
-                            <AccordionContent id={item.id}>
-                              {itemIndex < transformedList.length - 1 &&  transformedList[itemIndex + 1].message.content.parts[0]}
-                            </AccordionContent>
-                          </AccordionItem>
-                        </Accordion>}
+                          {item.message.author.role == 'user' && <Accordion type="single" collapsible>
+                            <AccordionItem value="item-1">
+                              <AccordionTrigger>{text}</AccordionTrigger>
+                              <AccordionContent >
+                                {secondIndex < transformedList.length - 1 && transformedList[secondIndex + 1].message.content.parts[0]}
+                              </AccordionContent>
+                            </AccordionItem>
+                          </Accordion>}
                         </>
 
                       )
