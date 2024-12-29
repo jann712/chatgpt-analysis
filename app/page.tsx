@@ -71,6 +71,7 @@ export default function Home() {
                   <div>
                     {item.message && item.message.content.parts.map((text, itemIndex) => {
                       // console.log(itemIndex)
+                      ///
 
                       return (
 
