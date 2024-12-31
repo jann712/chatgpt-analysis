@@ -68,11 +68,11 @@ export default function Home() {
               <span>Number of user inputs: </span>
               <span className='text-xl text-blue-600 font-semibold'>{numberUserInputs}</span>
               <p>Last updated: {updateTime}</p>
-              {transformedList.map((item, secondIndex) => {
+              {transformedList?.map((item, secondIndex) => {
                 console.log(secondIndex)
                 return (
                   <div key={uuidv4()}>
-                    {item.message && item.message.content.parts.map((text, itemIndex) => {
+                    {item.message?.content?.parts && item.message.content.parts.map((text, itemIndex) => {
                       // console.log(itemIndex)
                       ///
 
