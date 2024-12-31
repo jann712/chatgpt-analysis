@@ -1,5 +1,6 @@
 'use client'
 
+
 import { marked } from 'marked'
 import parse from 'html-react-parser';
 import { Message } from "./api/types";
@@ -11,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function Home() {
@@ -51,31 +53,31 @@ export default function Home() {
         {data && data.map((conv) => {
           const updateTime = new Date(conv.update_time * 1000).toDateString()
           const messages = Object.values(conv.mapping)
-          
+
           const messagesList: Message[] = []
           for (const value of messages) {
             messagesList.push(value)
           }
           const transformedList = messagesList.filter((item) => item.message && item.message?.author?.role != 'system')
+          const numberUserInputs = transformedList.filter((item) => item.message.author.role == "user").length
           // console.log(transformedList)
-          
+
           return (
-            <div className=" items-center border-4 border-blue-200 p-2 rounded-md">
+            <div className=" items-center border-4 border-blue-200 p-2 rounded-md" key={uuidv4()}>
               <h4 className="font-semibold text-orange-500">{conv.title}</h4>
               <span>Number of user inputs: </span>
-              <span className='text-xl text-blue-600 font-semibold'>{transformedList.filter((item) => item.message.author.role == "user").length}</span>
+              <span className='text-xl text-blue-600 font-semibold'>{numberUserInputs}</span>
               <p>Last updated: {updateTime}</p>
               {transformedList.map((item, secondIndex) => {
                 console.log(secondIndex)
                 return (
-                  <div>
+                  <div key={uuidv4()}>
                     {item.message && item.message.content.parts.map((text, itemIndex) => {
                       // console.log(itemIndex)
                       ///
 
                       return (
-
-                        <>
+                        <div key={item.id}>
                           {item.message.author.role == 'user' && <Accordion type="single" collapsible>
                             <AccordionItem value="item-1">
                               <AccordionTrigger>{text}</AccordionTrigger>
@@ -84,7 +86,7 @@ export default function Home() {
                               </AccordionContent>
                             </AccordionItem>
                           </Accordion>}
-                        </>
+                        </div>
 
                       )
                     })}
