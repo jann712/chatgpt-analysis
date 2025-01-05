@@ -77,7 +77,7 @@ export default function Home() {
           // setNumberOfMessages(numberUserInputs)
           // setPdfObject([...pdfObject, {title: currentTile, numberMessages: currentNumberOfMessages}])
           return (
-            <div className=" items-center border-2 border-slate-200 p-4 rounded-sm max-h-72 overflow-scroll" key={uuidv4()}>
+            <div className=" items-center border border-slate-200 p-4 rounded-sm max-h-72 overflow-scroll" key={uuidv4()}>
               <h4 className="font-semibold text-cyan-800">{conv.title}</h4>
               <span>Number of user inputs: </span>
               <span className='text-xl text-blue-600 font-semibold'>{numberUserInputs}</span>
