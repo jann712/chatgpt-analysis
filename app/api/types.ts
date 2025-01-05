@@ -26,3 +26,8 @@ export type Conversation = {
     
     
 }
+
+export type messageObject = {
+    title: string
+    numberMessages: number
+}
