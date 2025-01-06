@@ -5,7 +5,7 @@ import {v4 as uuid} from 'uuid'
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'column',
-        margin: 24
+        margin: 48
     },
     section: {
         margin: 10,
