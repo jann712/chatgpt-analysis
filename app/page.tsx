@@ -132,7 +132,7 @@ export default function Home() {
           <span className="text-blue-300 font-bold text-4xl transition">
             {data && data!.length}
           </span>
-          <span className="font-semibold transition">chats</span>
+          {data && <span className="font-semibold transition">chats</span>}
         </div>
       </div>
       <div className="grid grid-cols-2 m-12 gap-3">

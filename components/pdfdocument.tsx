@@ -5,7 +5,7 @@ import {v4 as uuid} from 'uuid'
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'column',
-        margin: 48
+        marginTop: 20
     },
     section: {
         margin: 10,
@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     },
     view: {
         marginVertical: 10,
-        fontSize: 12
+        fontSize: 12,
+        marginHorizontal: 30
     },
     title: {
         textAlign: 'center',
