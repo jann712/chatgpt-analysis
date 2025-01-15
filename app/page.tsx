@@ -16,6 +16,7 @@ import { messageObject } from "./api/types";
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { PDFDocument } from "@/components/pdfdocument";
+import FinalizedLineChart from "@/components/linechart";
 
 export default function Home() {
   // const [currentTile, setTitle] = useState("")
@@ -117,6 +118,9 @@ export default function Home() {
         <h2 className="text-center text-xl font-semibold">
           Exported Data Analysis
         </h2>
+      </div>
+      <div className="w-48 h-48">
+      <FinalizedLineChart />
       </div>
 
       <div className="w-full flex justify-center">
