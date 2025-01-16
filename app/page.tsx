@@ -119,9 +119,9 @@ export default function Home() {
           Exported Data Analysis
         </h2>
       </div>
-      <div className="w-48 h-48">
-      <FinalizedLineChart />
-      </div>
+      {/* <div className="w-48 h-48">
+      {/* <FinalizedLineChart /> */}
+      {/* </div> */}
 
       <div className="w-full flex justify-center">
         {data && (
