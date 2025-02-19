@@ -28,7 +28,7 @@ export default function Home() {
     let genericArray: messageObject[] = [];
     if (data != undefined) {
       data.forEach((element) => {
-        console.log(element);
+        // console.log(element);
         const messages = Object.values(element.mapping);
         const updateTime = new Date(
           element.update_time * 1000
@@ -40,8 +40,10 @@ export default function Home() {
         }
 
         const transformedList = messagesList.filter(
-          (item) => item.message && item.message?.author?.role != "system"
+          (item) => item.message && (item.message?.author?.role == "assistant" || item.message?.author?.role == "user") && item.message.content.parts && item.message.content.parts[0].length > 2
         );
+
+        
         const numberUserInputs = transformedList.filter(
           (item) => item.message.author.role == "user"
         ).length;
@@ -71,6 +73,7 @@ export default function Home() {
   //   })
   // }
 
+  
   async function fileInput(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files || e.target.files.length == 0) {
       return;
@@ -119,9 +122,6 @@ export default function Home() {
           Exported Data Analysis
         </h2>
       </div>
-      {/* <div className="w-48 h-48">
-      {/* <FinalizedLineChart /> */}
-      {/* </div> */}
 
       <div className="w-full flex justify-center">
         {data && (
@@ -152,8 +152,9 @@ export default function Home() {
               messagesList.push(value);
             }
             const transformedList = messagesList.filter(
-              (item) => item.message && item.message?.author?.role != "system"
+              (item) => item.message && item.message?.content?.parts && item.message?.content?.parts[0]?.length > 1
             );
+            console.log(transformedList)
             const numberUserInputs = transformedList.filter(
               (item) => item.message.author.role == "user"
             ).length;
@@ -186,8 +187,8 @@ export default function Home() {
                                         {text}
                                       </AccordionTrigger>
                                       <AccordionContent className="max-h-48 overflow-scroll bg-slate-50 p-6">
-                                        {secondIndex <
-                                          transformedList.length - 1 &&
+                                        {/* Parte do código que tá dando bug vvvvvv What is This*/}
+                                        {transformedList[secondIndex + 1].message.content.parts &&
                                           parse(
                                             //@ts-ignore
                                             marked(
@@ -209,13 +210,13 @@ export default function Home() {
             );
           })}
       </div>
-      <div className="flex justify-center items-center ">
+      <div className="flex justify-center items-center">
         <input
           type="file"
-          multiple={true}
+          // multiple={true}
           onChange={fileInput}
           title=""
-          className="file:flex file:flex-col file:w-fit w-48 justify-center flex items-center place-items-center file:rounded-full file:py-2 file:px-4 file:bg-blue-200 file:hover:bg-blue-700 file:transition file:hover:text-white"
+          className="file:flex file:flex-col file:w-fit w-48 justify-center flex items-center place-items-center file:rounded-full file:py-2 file:px-4 file:bg-blue-200 file:hover:bg-blue-700 file:transition file:hover:text-white file:cursor-pointer"
         />
       </div>
     </div>
